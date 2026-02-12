@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text Manipulation with RegEx</title>
+
+<style>
+body{
+    background:#f3f3f3;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    padding:40px;
+}
+
+.container{
+    width:700px;
+    background:#9fc3d1;
+    border:2px solid #ddd;
+}
+
+header{
+    background:#e57373;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+footer{
+    background:#e57373;
+    color:white;
+    text-align:center;
+    padding:10px;
+    margin-top:10px;
+}
+
+textarea{
+    width:95%;
+    height:120px;
+    margin:15px;
+    padding:10px;
+}
+
+input{
+    width:95%;
+    margin:10px;
+    padding:10px;
+}
+
+label{
+    margin-left:15px;
+    font-weight:bold;
+}
+
+.buttons{
+    text-align:center;
+    margin:15px;
+}
+
+button{
+    background:#2bbbad;
+    border:none;
+    padding:10px 20px;
+    margin:10px;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1c8c80;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<header>Text Manipulation with RegEx</header>
+
+<textarea id="inputText">
+Text Manipulation with RegEx, Text Manipulation with RegEx. All rights reserved.
+</textarea>
+
+<label>Search for:</label>
+<input type="text" id="searchText" placeholder="Enter text or regex">
+
+<label>Replace with:</label>
+<input type="text" id="replaceText" placeholder="Replacement text">
+
+<div class="buttons">
+<button onclick="searchText()">Search</button>
+<button onclick="replaceTxt()">Replace</button>
+<button onclick="formatText()">Format</button>
+</div>
+
+<h3 style="margin-left:15px;">Results</h3>
+<textarea id="resultBox"></textarea>
+
+<footer>© 2025 Text Manipulation with RegEx. All rights reserved.</footer>
+
+</div>
+
+<script>
+function getValues(){
+    return {
+        text: document.getElementById("inputText").value,
+        search: document.getElementById("searchText").value,
+        replace: document.getElementById("replaceText").value,
+        resultBox: document.getElementById("resultBox")
+    };
+}
+
+function searchText(){
+    const {text, search, resultBox} = getValues();
+
+    if(!search){
+        alert("Enter search text");
+        return;
+    }
+
+    const regex = new RegExp(search, "gi");
+    const matches = text.match(regex);
+
+    resultBox.value = matches 
+        ? `Found ${matches.length} match(es):\n\n${matches.join("\n")}`
+        : "No matches found.";
+}
+
+function replaceTxt(){
+    const {text, search, replace, resultBox} = getValues();
+
+    if(!search){
+        alert("Enter search text");
+        return;
+    }
+
+    const regex = new RegExp(search, "gi");
+    resultBox.value = text.replace(regex, replace);
+}
+
+function formatText(){
+    const {text, search, resultBox} = getValues();
+
+    if(!search){
+        alert("Enter search text");
+        return;
+    }
+
+    const regex = new RegExp(search, "gi");
+    resultBox.value = text.replace(regex, m => `[${m}]`);
+}
+</script>
+
+</body>
+</html>
