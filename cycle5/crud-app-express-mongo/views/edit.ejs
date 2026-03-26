@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit</title>
+</head>
+<body>
+
+<h1>Edit Item</h1>
+
+<form action="/edit/<%= item._id %>" method="POST">
+    Name: <input type="text" name="name" value="<%= item.name %>"><br><br>
+    Description: <input type="text" name="description" value="<%= item.description %>"><br><br>
+    <button type="submit">Update</button>
+</form>
+
+<a href="/">Back</a>
+
+</body>
+</html>
